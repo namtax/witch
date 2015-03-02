@@ -1,5 +1,6 @@
 require_relative 'api'
 require_relative 'null_api'
+require_relative 'notifier'
 
 class Witch
   attr_reader :api
@@ -15,16 +16,12 @@ class Witch
   end
 
   def status
-    current_uri || notification
+    Notifier.new(current_uri).run
   end
 
   private
 
   def current_uri
-    "current uri = #{api.current_uri}" if api.current_uri
-  end
-
-  def notification
-    %q[page request unsuccessful - please try again later]
+    api.current_uri
   end
 end
