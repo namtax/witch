@@ -1,5 +1,5 @@
 module Witch
-  class NullApi
+  class NullUi
     def search
       nil
     end

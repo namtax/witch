@@ -1,23 +1,23 @@
-require 'witch/api'
 require 'witch/configuration'
-require 'witch/null_api'
 require 'witch/notifier'
+require 'witch/null_ui'
+require 'witch/ui'
 
 module Witch
-  attr_reader :api
+  attr_reader :ui
 
   def self.run
-    api.visit || @api = NullApi.new
-    api.search
-    api.click_top_hit
+    ui.visit || @ui = NullUi.new
+    ui.search
+    ui.click_top_hit
   end
 
   def self.status
-    Notifier.new(api.current_uri).run
+    Notifier.new(ui.current_uri).run
   end
 
-  def self.api
-    @api ||= Api.new
+  def self.ui
+    @ui ||= Ui.new
   end
 end
 

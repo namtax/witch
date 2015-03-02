@@ -1,7 +1,7 @@
 require 'mechanize'
 
 module Witch
-  class Api
+  class Ui
     attr_reader :agent
 
     def initialize(agent = Mechanize.new)

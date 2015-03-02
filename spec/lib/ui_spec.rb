@@ -1,6 +1,6 @@
 module Witch
-  describe Api do
-    subject      { Api.new(agent) }
+  describe Ui do
+    subject      { Ui.new(agent) }
     let(:agent)  { double(page: page) }
     let(:page)   { double }
 
