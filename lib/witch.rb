@@ -1,27 +1,23 @@
-require_relative 'api'
-require_relative 'null_api'
-require_relative 'notifier'
+require 'witch/api'
+require 'witch/configuration'
+require 'witch/null_api'
+require 'witch/notifier'
 
-class Witch
+module Witch
   attr_reader :api
 
-  def initialize(api = Api.new)
-    @api = api
-  end
-
-  def run
+  def self.run
     api.visit || @api = NullApi.new
     api.search
     api.click_top_hit
   end
 
-  def status
-    Notifier.new(current_uri).run
+  def self.status
+    Notifier.new(api.current_uri).run
   end
 
-  private
-
-  def current_uri
-    api.current_uri
+  def self.api
+    @api ||= Api.new
   end
 end
+
