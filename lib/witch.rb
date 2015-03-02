@@ -10,14 +10,15 @@ module Witch
     ui.visit || @ui = NullUi.new
     ui.search
     ui.click_top_hit
-  end
-
-  def self.status
-    Notifier.new(ui.current_uri).run
+    status
   end
 
   def self.ui
     @ui ||= Ui.new
+  end
+
+  def self.status
+    Notifier.new(ui.current_uri).run
   end
 end
 
