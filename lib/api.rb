@@ -9,7 +9,7 @@ class Api
   end
 
   def visit
-    agent.get(Configuration.search_page)
+    agent.get(Configuration.search_page) rescue nil
   end
 
   def search

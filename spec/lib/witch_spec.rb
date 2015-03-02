@@ -1,10 +1,19 @@
 describe Witch do
-  let(:expected_uri) { %q[http://university.which.co.uk/] }
+  describe '#status' do
+    context 'success' do
+      let(:expected_uri) { %q[current uri = http://university.which.co.uk/] }
+      it 'navigates to which page' do
+        subject.run
+        expect(subject.status).to eq expected_uri
+      end
+    end
 
-  describe '#run' do
-    it 'navigates to which page' do
-      subject.run
-      expect(subject.current_uri).to eq expected_uri
+    context 'faulty page' do
+      before { expect_any_instance_of(Mechanize).to receive(:get).and_raise(SocketError) }
+      it 'notifies user' do
+        subject.run
+        expect(subject.status).to eq 'page request unsuccessful - please try again later'
+      end
     end
   end
 end

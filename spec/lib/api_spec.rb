@@ -8,6 +8,11 @@ describe Api do
       expect(agent).to receive(:get).with(Configuration.search_page)
       subject.visit
     end
+
+    context 'faulty page' do
+      before { allow(agent).to receive(:get).and_raise(SocketError) }
+      it     { expect { subject.visit }.to_not raise_error }
+    end
   end
 
   describe '#search' do
