@@ -9,11 +9,11 @@ module Witch
     end
 
     def visit
-      agent.get(Configuration.search_page) rescue nil
+      agent.get(search_page) rescue nil
     end
 
     def search
-      search_form.q = Configuration.search_term
+      search_form.q = search_term
       search_form.submit
     end
 
@@ -27,6 +27,10 @@ module Witch
 
     private
 
+    def search_page
+      Configuration.search_page
+    end
+
     def search_form
       forms.detect{ |f| f.action[/search/] }
     end
@@ -37,6 +41,10 @@ module Witch
 
     def page
       agent.page
+    end
+
+    def search_term
+      Configuration.search_term
     end
 
     def top_link

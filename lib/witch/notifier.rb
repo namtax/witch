@@ -7,7 +7,7 @@ module Witch
     end
 
     def run
-      current_uri || notification
+      current_uri || error
     end
 
     private
@@ -16,7 +16,7 @@ module Witch
       "current uri = #{uri}" if uri
     end
 
-    def notification
+    def error
       %q[page request unsuccessful - please try again later]
     end
   end
